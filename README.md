@@ -1,5 +1,5 @@
 # C PROGRAMMING
-  
+<details> <summary> C CƠ BẢN </summary>
 ## C CƠ BẢN
 ### Biến
   - uint8_t có kích thước 2^8 và có giá trị từ 0 -> 2^8-1
@@ -27,7 +27,7 @@
       return 0;
     }
 ```
-
+</details>
 ## POINTER
 ### 1. Pointer
 - Khai báo con trỏ: Kiểu dữ liệu* Tên;
