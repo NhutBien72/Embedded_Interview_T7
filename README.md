@@ -610,4 +610,5 @@ int main(){
   return 0;
 }
 ```
-
+# EMBEDDED
+<details> <summary> SPI </summary>
