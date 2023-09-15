@@ -198,3 +198,394 @@ VD: Chỉ thị `#include` cho phép ghép thêm mã chương trình của một
 - Macro khiến kích thước bộ nhớ chương trình lớn nhưng thời gian chạy nhanh -> tốc độ nhanh, kích thước lớn (code dài hơn -> file dài hơn).
 - Inline Function khiến kích thước bộ nhớ chương trình lớn, tuy nhiên nó làm giảm thời gian chạy chương trình -> tốc độ nhanh, kích thước lớn.
 - Function bình thường sẽ phải gọi Function call nên tốn thời gian hơn Inline Function nhưng kích thước chương trình nhỏ -> tốc độ sẽ chậm, kích thước nhỏ (code ngắn hơn -> file ngắn hơn).
+
+  ## C++ PROGRAMMING LANGUAGE
+
+<details> <summary> C++ BASIC </summary>
+
+***C++** cũng tương tự như **C**, cũng có các lệnh cơ bản như C, `include` thư viện để sử dụng các hàm, cũng có các kiểu dữ liệu tương tự như C,...*
+  - VD1:
+```sh
+#include <iostream>
+using namespace std;
+
+int main(){
+  cout<<"HELLO\n";
+  return 0;
+}
+```
+  - VD2:
+```sh
+#include <iostream>
+using namespace std;
+
+int main(){
+  int key = 0;
+  cout<<"nhap key: ";
+  cin>>key;
+  cout<<"key = "<<key<<endl;
+  return 0;
+}
+```
+
+</details>
+
+<details> <summary> CLASS </summary>
+
+### CLASS
+
+Class là kiểu dữ liệu cho người dùng tự định nghĩa tương tự như Struct, Union, Enum
+
+Class là một mô tả trừu tượng (abstract) của nhóm các đối tượng (object) có cùng bản chất, ngược lại mỗi một đối tượng là một thể hiện cụ thể (instance) cho những mô tả trừu tượng đó. Một Class trong C++ sẽ có các đặc điểm sau:
+  - Một Class bao gồm các thành phần dữ liệu (thuộc tính hay **property**) và các phương thức (hàm thành phần hay **method**)
+  - Từ khóa Class sẽ chỉ điểm bắt đầu của một Class sẽ được cài đặt.
+```sh
+  VD: Một class đơn giản: Class Car
+    - Một chiếc xe hơi vậy thì sẽ có chung những đặc điểm là đều có vô lăng, có bánh xe nhiều hơn 3, có động cơ... -> một Class
+    - Một model hay mẫu mà người ta đã quy định là nếu đúng như vậy thì nó là xe hơi
+    - Nhưng mà xe thì có thể có nhiều hãng khác nhau, BMW, Vinfast, Toyota... Thì mỗi hãng xe lại có những model xe khác nhau nhưng chúng đều là xe hơi
+    - Vậy thì trong lập trình cũng vậy, Class là quy định ra một mẫu, một model mà các thể hiện của nó (instance) hay đối tượng (object) phải tuân theo
+```
+  - VD:
+```sh
+#include <iostream>
+#include <string>
+using namespace std;
+class Person {
+    public:
+        string firstName;       // property
+        string lastName;        // property
+        int age;                // property
+
+        void fullname() {       // method
+            cout << firstName << ' ' << lastName;
+        }
+};
+int main(){
+  Person person;
+  person.firstName = "Khanh";
+  person.lastName = "Truong";
+  person.fullname();            // sẽ in ra màn hình là "Khanh Truong"
+  return 0;
+}
+```
+
+### Access modifiers & Properties declaration
+  **Access modifier**
+  - Là phạm vi truy cập của các thuộc tính và phương thức sẽ được khai báo bên dưới nó. Có 3 phạm vi truy cập trong C++ là ***public***, ***private*** và ***protected***
+  - Các thuộc tính và phương thức khai báo **public** thì có thể được truy cập trực tiếp thông qua instance của class đó. Các thuộc tính nên khai báo là public nếu bạn ***không có ràng buộc điều kiện trước khi gán*** (**người dùng có thể thoải mái gán giá trị**) hoặc bạn không cần xử lý trước khi trả về giá trị thuộc tính
+  - Các thuộc tính **private** thường được sử dụng khi bạn ***không mong muốn*** người khác có thể tùy ý gán giá trị hoặc là bạn muốn xử lý trước khi trả về giá trị
+  - Đối với **protected**, các phương thức và thuộc tính ***chỉ có thể truy cập qua các class kế thừa nó hoặc chính nó***
+
+  **Method declaration** là phương thức cũng giống như một hàm bình thường
+  - Đối với phương thức thì có hai cách định nghĩa thi hành: định nghĩa thi hành trong lúc định nghĩa class và định nghĩa thi hành bên ngoài class
+
+  VD: Định nghĩa thi hành bên trong class
+```sh
+class Animal{
+  public:
+    string sound;
+    void makeNoise(){
+    cout << sound;
+    }
+};
+```
+  VD: Định nghĩa thi hành bên ngoài class
+```sh
+class Animal{
+  public:
+    string sound;
+    void makeNoise();
+};
+void Animal::makeNoise(){
+  cout << sound;
+}
+```
+  **Constructor** (hàm tạo) là một hàm đặc biệt, nó sẽ được gọi ngay khi chúng ta khởi tạo một object
+  
+  VD:
+```sh
+class Person{
+  public:
+    string firstName;
+    string lastName;
+    int age;
+
+    Person(string _firstName, string _lastName, int _age){
+      firstName = _firstName;
+      lastName = _lastName;
+      age = _age;
+    }
+    void fullname(){
+      cout << firstName << ' ' << lastName;
+    }
+};
+```
+  **Destructor** (hàm hủy) việc được quản lý bộ nhớ một cách hoàn toàn do người lập trình làm chủ thì destructor là vô cùng cần thiết
+  - Trong số thuộc tính của class bạn định nghĩa có một con trỏ, mảng động...nếu không sử dụng desctructor thì sẽ xảy ra chuyện rò rỉ bộ nhớ. Với destructor bạn có thể xóa con trỏ đi khi object được thu hồi hoặc bạn có thể gọi tường minh destructor
+  
+  VD:
+```sh
+class MyClass{
+    public:
+        MyClass(){                               // constructor
+            cout << "Constructor is executedn";
+        }
+        ~MyClass(){                              // destructor
+            cout << "Constructor is executedn";
+        }
+};
+```
+  **Static member** (thành viên tĩnh) trong class C++ cũng tương tự như với **static variable** (biến tĩnh) trong function
+  - *Đối với function*, sau khi thực hiện xong khối lệnh và thoát thì static variable vẫn sẽ không mất đi
+  - *Đối với class*, static member sẽ là thuộc tính dùng chung cho tất cả các đối tượng của class đó, cho dù là không có đối tượng nào tồn tại. Tức là có thể khai báo nhiều object, mỗi object các thuộc tính của nó đều khác nhau nhưng riêng static thì **chỉ có một** và static member tồn tại trong suốt chương trình cho dù có hay không có object nào của nó hay nói ngắn gọn là dùng chung một biến static
+
+</details>
+
+<details> <summary> FEATURE OF OBJECT ORIENTED PROGRAMMING (OOP) </summary>
+
+### FEATURE OF OBJECT ORIENTED PROGRAMMING (OOP)
+  OOP: là đặc tính của lập trình hướng đối tượng
+  
+  Có 4 đặc tính quan trọng của lập trình hướng đối tượng trong C++ cần nắm:
+  - Inheritance (Tính kế thừa)
+  - Polymorphism (Tính đa hình)
+  - Abstraction (Tính trừu tượng)
+  - Encapsulation (Tính đóng gói)
+
+### Inheritance (Tính kế thừa)
+  
+  Tính kế thừa: một class có thể kế thừa các thuộc tính của một class khác đã tồn tại trước đó
+  
+  Khi một class con được tạo ra bởi việc kế thừa thuộc tính của class cha thì chúng ta sẽ gọi class con đó là *subclass* trong C++ và class cha chính là *superclass* trong C++
+```sh
+  Class cha có 3 phạm vi truy cập là private, protected, public
+  Class con kế thừa theo kiểu
+    - Public:
+      + public class cha sẽ là public class con
+      + protected class cha sẽ là protected class con
+      + private không kế thừa được
+    - Protected:
+      + public class cha sẽ là protected class con
+      + protected class cha sẽ là protected class con
+      + private không kế thừa được
+    - Private:
+      + public class cha sẽ là private class con
+      + protected class cha sẽ là private class con
+      + private không kế thừa được
+      -> Khi class con (1) kế thừa class cha theo kiểu private thì class con của class con (1) sẽ không kế thừa được các property hay method của class con (1)
+```
+### Polymorphism (Tính đa hình)
+  
+  Tính đa hình: là một khả năng mà một method trong class có thể đưa ra các kết quả hoàn toàn khác nhau, tùy thuộc vào dữ liệu được xử lý. Tức các method có cùng tên nhưng các dữ liệu input khác nhau sẽ đưa ra các kết quả khác nhau
+
+### Abstraction (Tính trừu tượng)
+  
+  Tính trừu tượng: là một khả năng mà chương trình có thể bỏ qua sự phức tạp bằng cách tập trung vào cốt lõi của thông tin cần xử lý. Tức có thể xử lý một đối tượng bằng cách gọi tên một phương thức và trả về kết quả xử lý, mà không cần biết đối tượng đó đã được các thao tác như nào trong class
+
+  VD: Có thể nấu cơm bằng nồi cơm điện bằng cách rất đơn giản là ấn công tắc nấu, mà không cần biết là bên trong cái nồi cơm điện đó đã làm thế nào mà gạo có thể nấu thành cơm
+  
+### Encapsulation (Tính đóng gói)
+
+  Tính đóng gói: là khả năng không cho object truy cập trực tiếp đến property, nếu muốn truy cập đến property thì phải thông qua method, tránh trường hợp xử lí bị sai dữ liệu, nên sẽ đảm bảo tính toàn vẹn của object, cũng như giúp giấu đi các dữ liệu, thông tin cần được che giấu
+
+  VD: Khi bạn dùng một cái Iphone, bạn không thể thay đổi các cấu trúc bên trong của hệ điều hành IOS, mà chỉ có Apple mới có thể làm được điều này
+  
+</details>
+
+<details> <summary> VECTOR </summary>
+
+### VECTOR
+
+- Giống như là mảng (array), vector trong C++ là một đối tượng dùng để chứa các đối tượng khác, và các đối tượng được chứa này cũng được lưu trữ một cách liên tiếp trong vector
+- Tuy nhiên, nếu như số lượng phần tử (size) của một mảng là cố định, thì ở vector, nó hoàn toàn có thể thay đổi trong suốt quá trình làm việc của chương trình
+- **Array lưu ở Stack, Vector lưu ở Heap**
+- Syntax: `vector <kiểu dữ liệu> ten-vector`
+
+### Modifiers
+
+  **1. push_back()**
+  - `push_back()`: Hàm đẩy một phần tử vào vị trí sau cùng của vector. Nếu kiểu của đối tượng được truyền dưới dạng tham số trong `push_back()` không giống với kiểu của vector thì sẽ bị ném ra
+  - Syntax: `ten-vector.push_back(ten-cua-phan-tu);`
+
+  **2. assign()**
+  - `assign()`: Nó gán một giá trị mới cho các phần tử vector bằng cách thay thế các giá trị cũ
+  - Syntax: `ten-vector.assign(int size, int value);`
+
+  **3. pop_back()**
+  - `pop_back()`: Hàm `pop_back()` được sử dụng để xóa đi phần tử cuối cùng một vector
+
+  **4. insert()**
+  - `insert()`: Hàm này chèn các phần tử mới vào trước phần tử trước vị trí được trỏ bằng vòng lặp. Chúng ta cũng có thể chuyển một số đối số thứ ba, đếm số lần phần tử được chèn vào trước vị trí được trỏ
+
+  **5. erase()**
+  - `erase()`: Hàm được sử dụng để xóa các phần tử tùy theo vị trí vùng chứa
+
+  **6. emplace()**
+  - `emplace()`: Nó mở rộng vùng chứa bằng cách chèn phần tử mới vào
+
+  **7. emplace_back()**
+  - `emplace_back()`: Nó được sử dụng để chèn một phần tử mới vào vùng chứa vector, phần tử mới sẽ được thêm vào cuối vector
+
+  **8. swap()**
+  - `swap()`: Hàm được sử dụng để hoán đổi nội dung của một vector này với một vector khác cùng kiểu. Kích thước có thể khác nhau
+
+  **9. clear()**
+  - `clear()`: Hàm được sử dụng để loại bỏ tất cả các phần tử của vùng chứa vector
+
+</details>
+
+<details> <summary> TEMPLATE </summary>
+
+  - **Template** là một kiểu dữ liệu trừu tượng tổng quát cho các kiểu dữ liệu int, float, double, bool...
+  - Có 2 loại đó là Function template & Class template
+  - Template giúp người lập trình định nghĩa tổng quát cho Function và Class thay vì phải nạp chồng (overloading) cho từng hàm hay phương thức với những kiểu dữ liệu khác nhau
+```sh
+#include <iostream>
+template <typename var1, typename var2>
+var1 tong(var1 a, var2 b){
+  return var1(a+b);
+}
+int main(){
+    printf("tong a va b la %f\n", tong(3,5.6));
+    //var 1 sẽ có kiểu dữ liệu là int, var2 có kiểu dữ liệu là double
+    //tong trả về kiểu var1 nên sẽ có kiểu dữ liệu là int
+    return 0;
+}
+```
+
+</details>
+
+<details> <summary> NAMESPACE </summary>
+
+  - **Namespace** được sử dụng để định nghĩa một phạm vi nhằm mục đích phân biệt các hàm, lớp, biến, ... cùng tên trong các thư viện khác nhau
+```sh
+  - VD:
+  + File A, include file thư viện B và file thư viện C
+  + File B và C có cũng 1 function và có cùng input nhưng các function đó xử lí khác nhau
+  + Khi file A `using namespace B` và `using namespace C` -> gọi function (giống nhau đó) -> báo lỗi => do file A không hiểu đang gọi function của `namespace` nào
+```
+```sh
+  - VD:
+#include <iostream>
+using namespace std;
+using namespace ConOngA;
+namespace ConOngA{
+  int Teo=10;
+}
+namespace ConOngB{
+    int Teo=20;
+}
+int main(){
+    cout << Teo << endl;            //cách gọi khi using namespace ConOngA
+    //dòng này sẽ bị lỗi nếu sử dụng cả 2 using namespace ConOngA và using namespace ConOngB
+    //-> vì nó không hiểu đang gọi Teo trong namespace nào
+
+    cout << ConOngB::Teo << endl;   //cách gọi thủ công
+    return 0;
+}
+```
+
+</details>
+
+<details> <summary> VIRTUAL FUNCTION </summary>
+
+  - **Virtual function** là một hàm trong class mà class kế thừa cần phải định nghĩa lại, là một phần không thể thiếu để thể hiện tính đa hình trong kế thừa
+```sh
+#include <iostream>
+class DoiTuong{
+    public:
+      virtual char *cmd(){
+        return (char *)"doi tuong\n";
+      }
+      void Display(){
+        printf("%s",cmd());
+      }
+};
+class SinhVien : public DoiTuong{
+    char* cmd(){
+        return (char *)"sinhvien\n";
+    }
+};
+int main(){
+  DoiTuong dt;
+  dt.Display();
+  SinhVien sv;
+  sv.Display();
+  return 0;
+}
+
+//Nếu không sử dụng virtual
+//SinhVien kế thừa DoiTuong nên khi trỏ sv.Display thì sẽ trỏ đến hàm Display ở DoiTuong
+//cmd() trong Display ở DoiTuong đang trỏ đến char *cmd()
+//Nên khi ta gọi sv.Display thì cũng sẽ hiển thị nội dung trong vùng của class DoiTuong
+
+//Nếu sử dụng virtual
+//Khi gọi sv.Display, thì cmd() sẽ xem ở class SinhVien đã đã có ghi đè (override) hay chưa
+//Lúc đó virtual char *cmd() sẽ kiểm tra xem cmd() ở SinhVien có định nghĩa lại hay không
+//Nếu có thì nó sẽ load lại chương trình được định mới nhất (overload)
+```
+=>Khi viết chương trình, nếu method nào cần phải load lại các định nghĩa mới nhất của các class con kế thừa thì ta sẽ sử dụng virtual
+
+</details>
+
+<details> <summary> LINKED LIST </summary>
+
+  **Linked list** là một cấu trúc dữ liệu động, nó là một danh sách mà mỗi phần tử đều liên kết với phần tử đúng sau nó trong danh sách. Mỗi phần tử (được gọi là một node hay nút) trong danh sách liên kết đơn là một cấu trúc có hai thành phần:
+  - Thành phần dữ liệu: lưu thông tin về bản thân phần tử đó
+  - Thành phần liên kết: lưu địa chỉ phần tử đứng sau trong danh sách, nếu phần tử đó là phần tử cuối cùng thì thành phần này bằng NULL
+
+![image](https://github.com/KhanhTruongTG/EMBEDDED-INTERVIEW-T7/assets/139245069/83ad49ea-1e20-4234-8987-d6467667ddaf)
+
+  Do danh sách liên kết đơn là một cấu trúc dữ liệu động, được tạo nên nhờ việc cấp phát động nên nó mang một số đặc điểm sau đây:
+  - Được cấp phát bộ nhớ khi chạy chương trình
+  - Có thể đổi thay kích thước qua việc thêm, xóa phần tử
+  - Kích thước tối đa phụ thuộc vào bộ nhớ khả dụng của RAM
+  - Các phần tử được lưu trữ tự nhiên (không liên tiếp) trong RAM
+
+  Do tính liên kết của phần tử đầu và phần tử đứng sau nó trong danh sách liên kết đơn, nó có những đặc điểm sau:
+  - Chỉ cần nắm được phần tử đầu và cuối là có thể quản lý được danh sách
+  - Truy cập tới phần tử ngẫu nhiên phải duyệt từ đầu tới vị trí đó
+  - Chỉ có thể tìm kiếm tuyến tính một phần tử
+
+</details>
+
+<details> <summary> MAP </summary>
+
+  **Map** là một tập hợp các phần tử được sắp xếp theo thứ tự cụ thể, mà mỗi phần tử trong đó được hình thành bởi sự kết hợp của một cặp khóa và giá trị (key & value) với mỗi khóa là duy nhất trong map
+  - Các `key` được sử dụng để sắp xếp và xác định `value` tương ứng được liên kết với nó
+  - Mỗi `key` trong map là duy nhất và không được phép trùng lặp
+  - Các `value` trong map thì có thể trùng lặp, chúng có thể thay đổi giá trị, cũng như là được chèn hoặc xóa khỏi map
+  - Để sử dụng map bạn cần khai báo: `#include<map>`
+  - Syntax: `map <kiểu dữ liệu, kiểu dữ liệu> tên biến;`
+```sh
+  Trả về kích thước hiện tại của map: m.size();
+  Kiểm tra map có rỗng hoặc không: m.empty();     // trả về true nếu map rỗng, false nếu không rỗng
+  Truy cập phần tử trong map: m[x];               // truy cập value của khóa x
+  Chỉnh sửa phần tử trong map (phần tử chỉnh sửa phải ở dạng "cặp"): m.insert(x);
+  Xóa phần tử trong map: m.erase(x);
+  Xóa tất cả phần tử trong map: m.clear();
+```
+
+</details>
+
+<details> <summary> LAMBDA </summary>
+
+  **Lambda** là function nhưng được viết ở cục bộ (viết ở hàm main) thay vì khai báo ở toàn cục
+
+  Syntax: `[danh sách các biến ngoài lambda](parameter list) -> kiểu trả về { các câu lệnh mà lambda sẽ thực thi}`
+  
+  VD:
+```sh
+#include <iostream>
+int main(){
+  int x = 20;
+  auto tong = [x](int a, int b){
+    printf("tong: %d\n", a+b);
+    printf("x = %d\n, x);
+  };
+  tong(7, 9);
+  return 0;
+}
+```
+
