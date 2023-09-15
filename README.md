@@ -31,6 +31,8 @@
 ```
 </details>
 
+<details> <summary> POINTER </summary>
+  
 ## POINTER
 ### 1. Pointer
 - Khai báo con trỏ: Kiểu dữ liệu* Tên;
@@ -60,6 +62,9 @@
     int *ptr = &value;
     int **p_to_p = &ptr;
   ```
+  </details>
+
+  <details> <summary> MEMMORY LOCATION </summary>
   
 ## MEMMORY LOCATION
   Trên RAM có 5 phân vùng bộ nhớ: Text, Data, BSS, Heap, Stack
@@ -116,6 +121,9 @@ int *A = (int *)malloc(18446744073709551615);
   + Calloc: uint8_t * ptr = (uint8_t *)calloc(5, sizeof(uint8_t));
 - Thay đổi kích thước ô nhớ Realloc: ptr = (uint8_t *)realloc(ptr, 7 * sizeof(uint8_t));
 - Giải phóng: free(ptr);
+  </details>
+
+  <details> <summary> VARIABLE </summary>
 
 ## VARIABLE
 ### Static
@@ -142,12 +150,18 @@ int *A = (int *)malloc(18446744073709551615);
 ALU <- Register <- RAM
 ALU -> Register -> RAM
 - Biến được khai báo sẽ lưu trên RAM -> RAM gửi thông tin về Register -> Register gửi thông tin về ALU -> ALU thực hiện thuật toán -> ALU trả về Register -> Register trả về và lưu giá trị trên RAM.
+</details>
 
+<details> <summary> STRUCT, UNION </summary>
+  
 ## STRUC, UNION
 - Về mặt ý nghĩa, struct và union cơ bản giống nhau. Tuy nhiên, về mặt lưu trữ trong bộ nhớ, chúng có sự khác biệt như sau:
 - Struct: Dữ liệu của các thành viên của struct được lưu trữ ở những vùng nhớ khác nhau -> Do đó kích thước của 1 Struct tối thiểu bằng kích thước các thành viên cộng lại tại vì còn phụ thuộc vào bộ nhớ đệm (struct padding).
 - Union : Dữ liệu các thành viên sẽ dùng chung 1 vùng nhớ -> Do đó kích thước của Union được tính là kích thước lớn nhất của kiểu dữ liệu trong Union, việc thay đổi nội dung của 1 thành viên sẽ dẫn đến thay đổi nội dung của các thành viên khác.
+</details>
 
+<details> <summary> COMPLIER </summary>
+  
 ## COMPLIER
 ![image](https://github.com/NhutBien72/Embedded_Interview_T7/assets/139468908/09735377-7be4-4803-81ee-ac831a1a2688)
 ### 1. Giai đoạn tiền xử lý (Pre-processor)
@@ -174,7 +188,11 @@ VD: Chỉ thị `#include` cho phép ghép thêm mã chương trình của một
 - Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (Executable hay .exe) thống nhất.
 - File sau khi gộp lại sẽ có đuôi mở rộng Executable hoặc .exe trên Window, còn trên MacOS hay Linux có thể đuôi theo chỉ định hoặc không có đuôi mở rộng.
 - Để chạy file code C trên Terminal dùng lệnh `gcc -o filename.exe filename.c` để tạo ra file thực thi, sau đó dùng lệnh `./filename` để chạy file thực thi.
+  
+</details>
 
+<details> <summary> MACRO, FUNCION, INLINE FUNCION </summary>
+  
 ## MACRO, FUNCION, INLINE FUNCION
 ### Macro
 - Marco là 1 tên bất kì (do lập trình viên đặt tên) trỏ tới 1 khối lệnh thực hiện một chức năng nào đó.
@@ -201,6 +219,7 @@ VD: Chỉ thị `#include` cho phép ghép thêm mã chương trình của một
 - Macro khiến kích thước bộ nhớ chương trình lớn nhưng thời gian chạy nhanh -> tốc độ nhanh, kích thước lớn (code dài hơn -> file dài hơn).
 - Inline Function khiến kích thước bộ nhớ chương trình lớn, tuy nhiên nó làm giảm thời gian chạy chương trình -> tốc độ nhanh, kích thước lớn.
 - Function bình thường sẽ phải gọi Function call nên tốn thời gian hơn Inline Function nhưng kích thước chương trình nhỏ -> tốc độ sẽ chậm, kích thước nhỏ (code ngắn hơn -> file ngắn hơn).
+</details>
 
   ## C++ PROGRAMMING LANGUAGE
 
